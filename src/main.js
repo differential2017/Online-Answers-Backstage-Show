@@ -7,8 +7,13 @@ import axios from 'axios';
 //api 接口
 Vue.prototype.apiUrl = {
   // 管理员验证登录  
-  adminLogin:"http://localhost:8088/sql/codeIgniter-3.1.10/index.php/login/checkadmin"
-
+  adminLogin:"http://localhost:8088/sql/codeIgniter-3.1.10/index.php/login/checkadmin",
+  //提交试卷
+  examPaperInfo:"http://localhost:8088/sql/CodeIgniter-3.1.10/index.php/examinfo/subinfo",
+  //获得试卷信息
+  getExamPaperInfo:"http://localhost:8088/sql/CodeIgniter-3.1.10/index.php/examinfo/getexaminfo",
+  //通过试卷id 得到试题信息
+  getExamPaperTitleInfo:"http://localhost:8088/sql/CodeIgniter-3.1.10/index.php/examinfo/getexamtitle"
 };  
 
 //事件总线

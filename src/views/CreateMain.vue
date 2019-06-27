@@ -1,7 +1,9 @@
 <template>
   <!-- 创建试卷的主组件 -->
-  <mu-container>
+  <div>
+    <Title></Title>
     <!-- 试卷基本信息的表单 -->
+    <mu-container>
     <p>只能创建自己部门的试题</p>
     <mu-form :model="form" class="mu-demo-form" :label-position="labelPosition" label-width="100">
       <mu-form-item prop="input" label="试卷名字">
@@ -61,7 +63,8 @@
       <p>试卷总分：{{sumMark}}</p>
       <mu-button color="success" @click.prevent="subForm">提交试卷</mu-button>
     </div>
-  </mu-container>
+     </mu-container>
+  </div>
 </template>
 
 <style>
@@ -85,6 +88,7 @@
 import CreateNew from "@/components/CreateNew";
 import CreateAlterObj from "@/components/CreateAlterObj";
 import CreateAlterSub from "@/components/CreateAlterSub";
+import Title from "@/components/Title"
 export default {
   data() {
     return {
@@ -160,6 +164,9 @@ export default {
         });
     }
   },
+  mounted(){
+    this.bus.$emit('adminInfo',this.$route.query.id);
+  },
   computed: {
     sumMark() {
       let sum = 0;
@@ -175,7 +182,8 @@ export default {
   components: {
     CreateNew,
     CreateAlterObj,
-    CreateAlterSub
+    CreateAlterSub,
+    Title
   }
 };
 </script>

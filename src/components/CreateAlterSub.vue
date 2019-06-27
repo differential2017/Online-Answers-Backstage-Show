@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { setTimeout } from "timers";
+
 export default {
   props: ["subinfo", "num"],
   data() {

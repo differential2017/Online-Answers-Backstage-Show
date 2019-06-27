@@ -2,7 +2,6 @@
   <!-- 主界面 -->
   <div>
     <Title></Title>
-    <component :is="comname"></component>
   </div>
 </template>
 <style>
@@ -10,7 +9,6 @@
 
 <script>
 import Title from "@/components/Title";
-import CreateMain from "@/components/CreateMain"
 export default {
   data: function() {
     return {
@@ -27,14 +25,10 @@ export default {
             path: "/"
         });
     }
-    this.bus.$emit('adminInfo',this.account);
-    this.bus.$on('comInfo',(data)=>{
-        this.comname=data;
-    })
+    this.bus.$emit('adminInfo',this.$route.query.id);
   },
   components: {
     Title,
-    CreateMain
   }
 };
 </script>
