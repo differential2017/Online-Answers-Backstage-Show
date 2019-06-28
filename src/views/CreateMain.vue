@@ -155,6 +155,9 @@ export default {
         .then(function(response) {
           if (response.data == "成功") {
             alert("提交成功");
+            that.$router.push({path:"/pviewmain", query:{
+              id:that.$route.query.id
+            }});
           } else {
             alert("提交失败");
           }

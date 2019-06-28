@@ -1,30 +1,30 @@
 <template>
   <div>
     <Title></Title>
-     <mu-container>
-    <mu-paper :z-depth="1">
-      <mu-data-table
-        :columns="columns"
-        :sort.sync="sort"
-        @sort-change="handleSortChange"
-        :data="list"
-        class="preview-form"
-      >
-        <template slot-scope="scope">
-          <td class="is-center">{{scope.row.DEPART_NAME}}</td>
-          <td class="is-center">{{scope.row.PAPER_NAME}}</td>
-          <td class="is-center">{{scope.row.START_TIME | t}}</td>
-          <td class="is-center">{{scope.row.END_TIME | t}}</td>
-          <td class="is-center">{{scope.row.SET_TIME}}</td>
-          <mu-button
-            color="primary"
-            class="is-center update-button"
-            @click.prevent="goToPreviewAlter(scope.row.PAPER_ID)"
-          >修改</mu-button>
-        </template>
-      </mu-data-table>
-    </mu-paper>
-     </mu-container>
+    <mu-container>
+      <mu-paper :z-depth="1">
+        <mu-data-table
+          :columns="columns"
+          :sort.sync="sort"
+          @sort-change="handleSortChange"
+          :data="list"
+          class="preview-form"
+        >
+          <template slot-scope="scope">
+            <td class="is-center">{{scope.row.DEPART_NAME}}</td>
+            <td class="is-center">{{scope.row.PAPER_NAME}}</td>
+            <td class="is-center">{{scope.row.START_TIME | t}}</td>
+            <td class="is-center">{{scope.row.END_TIME | t}}</td>
+            <td class="is-center">{{scope.row.SET_TIME}}</td>
+            <mu-button
+              color="primary"
+              class="is-center update-button"
+              @click.prevent="goToPreviewAlter(scope.row.PAPER_ID)"
+            >修改</mu-button>
+          </template>
+        </mu-data-table>
+      </mu-paper>
+    </mu-container>
   </div>
 </template>
 <style>
@@ -38,7 +38,7 @@
 </style>
 
 <script>
-import Title from "@/components/Title"
+import Title from "@/components/Title";
 export default {
   data() {
     return {
@@ -66,19 +66,18 @@ export default {
     goToPreviewAlter(i) {
       this.$router.push({
         path: "/previewalter",
-        query: { id: this.$route.query.id,paper_id: i }
+        query: { id: this.$route.query.id, paper_id: i }
       });
     }
   },
   mounted() {
     let that = this;
-    this.bus.$emit('adminInfo',this.$route.query.id);
+    this.bus.$emit("adminInfo", this.$route.query.id);
     //请求卷子信息
     this.axios
       .post(this.apiUrl.getExamPaperInfo, {})
       .then(function(response) {
         that.list = response.data;
-        console.log(that.list);
       })
       .catch(function(error) {
         alert("请求失败");
@@ -103,7 +102,7 @@ export default {
       return `${y}-${mm}-${d} ${h}:${m}`;
     }
   },
-  components:{
+  components: {
     Title
   }
 };
