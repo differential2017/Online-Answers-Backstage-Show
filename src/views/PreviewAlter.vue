@@ -200,6 +200,7 @@ export default {
         userName: this.$route.query.id
       })
       .then(function(response) {
+        console.log(response.data);
         //赋值基本信息
         that.form.input = response.data[2][0].PAPER_NAME;
         that.form.end = response.data[2][0].END_TIME;

@@ -135,10 +135,9 @@ export default {
     },
     //提交
     subForm() {
-      let that=this;
-      that.form.start=(new Date(that.form.start)).toString();
-      that.form.end=(new Date(that.form.end)).toString();
-      console.log(that.form.start);
+      let that = this;
+      that.form.start = new Date(that.form.start).toString();
+      that.form.end = new Date(that.form.end).toString();
       this.axios
         .post(this.apiUrl.examPaperInfo, {
           user: that.$route.query.id,
@@ -151,6 +150,11 @@ export default {
         .then(function(response) {
           if (response.data == "成功") {
             alert("提交成功");
+            console.lg("111");
+            that.$router.push({
+              path: "/previewmain",
+              query: { id: that.$route.query.id }
+            });
           } else {
             alert("提交失败");
           }

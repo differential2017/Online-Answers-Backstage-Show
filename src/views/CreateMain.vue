@@ -140,6 +140,10 @@ export default {
     //提交
     subForm() {
       let that=this;
+      if(new Date(that.form.start)>=new Date(that.form.end)){
+        alert("时间格式不对");
+        return false;
+      }
       that.form.start=(new Date(that.form.start)).toString();
       that.form.end=(new Date(that.form.end)).toString();
       console.log(that.form.start);
@@ -155,7 +159,7 @@ export default {
         .then(function(response) {
           if (response.data == "成功") {
             alert("提交成功");
-            that.$router.push({path:"/pviewmain", query:{
+            that.$router.push({path:"/previewmain", query:{
               id:that.$route.query.id
             }});
           } else {
