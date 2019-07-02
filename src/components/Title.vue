@@ -12,7 +12,7 @@
         <mu-list-item button @click.prevent="preview">
           <mu-list-item-title>预览试卷</mu-list-item-title>
         </mu-list-item>
-        <mu-list-item button to="/alterranking">
+        <mu-list-item button @click.prevent="show">
           <mu-list-item-title>判卷</mu-list-item-title>
         </mu-list-item>
         <mu-list-item button to="/alterranking">
@@ -68,10 +68,17 @@ export default {
         path: "/previewmain",
         query: { id: this.$route.query.id }
       });
+    },
+    show() {
+      console.log("11");
+      this.$router.push({
+        path: "/papershow",
+        query: { id: this.$route.query.id }
+      });
     }
   },
   mounted() {
-    this.bus.$on("adminInfo", (data) => {
+    this.bus.$on("adminInfo", data => {
       this.account = data;
     });
   }

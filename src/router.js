@@ -5,6 +5,9 @@ import Main from "@/views/Main";
 import CreateMain from "@/views/CreateMain";
 import PreviewMain from "@/views/PreviewMain";
 import PreviewAlter from "@/views/PreviewAlter";
+import PeopleShow from "@/views/PeopleShow";
+import PaperShow from "@/views/PaperShow";
+import MarkExam from "@/views/MarkExam"
 Vue.use(Router);
 
 export default new Router({
@@ -35,6 +38,21 @@ export default new Router({
       path: "/previewalter",
       name: "PreviewAlter",
       component: PreviewAlter
+    },
+    {
+      path:"/papershow",
+      name:"PaperShow",
+      component:PaperShow
+    },
+    {
+      path: "/peopleshow",
+      name: "PeopleShow",
+      component: PeopleShow
+    },
+    {
+      path: "/markexam",
+      name: "MarkExam",
+      component: MarkExam
     }
   ]
 });

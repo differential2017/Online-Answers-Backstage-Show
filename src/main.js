@@ -17,7 +17,15 @@ Vue.prototype.apiUrl = {
   //删除试卷
   deletePaper:"http://localhost:8088/sql/CodeIgniter-3.1.10/index.php/examinfo/deleteexam",
   //修改试卷
-  alterPaper:"http://localhost:8088/sql/CodeIgniter-3.1.10/index.php/examinfo/alterexam"
+  alterPaper:"http://localhost:8088/sql/CodeIgniter-3.1.10/index.php/examinfo/alterexam",
+  //部门列表
+  departName:"http://localhost:8088/sql/CodeIgniter-3.1.10/index.php/Depart/depart_name",
+  //答题信息 人员  对于某一个试卷
+  ansInfo:"http://localhost:8088/sql/CodeIgniter-3.1.10/index.php/people/peoplemakeexam",
+  //查询某人某个卷子作答的详细信息
+  peopleAnsInfo:"http://localhost:8088/sql/CodeIgniter-3.1.10/index.php/people/peoplemake",
+  //保存某个人的主观题分数
+  saveSub:"http://localhost:8088/sql/CodeIgniter-3.1.10/index.php/people/savesub"
 };  
 
 //事件总线

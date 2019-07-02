@@ -1,10 +1,10 @@
 <template>
   <div>
     <Title></Title>
-    <!-- 创建试卷的主组件 -->
+    <!--修改试卷 -->
     <mu-container>
       <!-- 试卷基本信息的表单 -->
-      <p>只能创建自己部门的试题</p>
+      <p>只能修改自己部门的试题，否则修改了也提交不了</p>
       <mu-form :model="form" class="mu-demo-form" :label-position="labelPosition" label-width="100">
         <mu-form-item prop="input" label="试卷名字">
           <mu-text-field v-model="form.input"></mu-text-field>
