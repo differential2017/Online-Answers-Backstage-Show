@@ -5,7 +5,7 @@
     <mu-text-field v-model="objObj.objTitle" multi-line :rows="4" full-width class="title-form"></mu-text-field>
     <!-- 上交图片 -->
     <div>
-    <img src alt ref="img" />
+    <img src alt ref="img" class="upimg"/>
     <input name="file" type="file" accept="image/png, image/gif, image/jpeg" @change="uploadImg" />
     </div>
     <label>A选项</label>
@@ -31,8 +31,9 @@
   </mu-container>
 </template>
 <style>
-img{
+.upimg{
   width: 500px;
+  margin: 0 auto;
 }
 </style>
 

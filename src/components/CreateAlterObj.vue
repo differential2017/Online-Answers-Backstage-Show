@@ -11,11 +11,27 @@
       :esc-press-close="false"
       :overlay-close="false"
       :open.sync="openAlert"
+      scrollable
     >
       <!-- 题目的表单 -->
       <mu-container>
         <label>题目</label>
         <mu-text-field v-model="objObj.objTitle" multi-line :rows="4" full-width class="title-form"></mu-text-field>
+        <div>
+          <img :src="objObj.img" alt class="upimg" />
+          <br />
+          <label for="upfile">
+            <span class="upbutton">上传文件</span>
+          </label>
+          <input
+            name="file"
+            type="file"
+            accept="image/png, image/gif, image/jpeg"
+            @change="uploadImg"
+            style="display:none"
+            id="upfile"
+          />
+        </div>
         <label>A选项</label>
         <mu-text-field v-model="objObj.AC"></mu-text-field>
         <br />
@@ -40,6 +56,18 @@
     </mu-dialog>
   </mu-container>
 </template>
+<style>
+.upbutton {
+  background-color: #fff; /* Green */
+  border: 1px solid #000;
+  color: black;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
 
 <script>
 export default {
@@ -55,7 +83,8 @@ export default {
         BC: null,
         CC: null,
         DC: null,
-        objMark: null
+        objMark: null,
+        img: null
       },
       openAlert: false,
       options: ["A", "B", "C", "D"]
@@ -72,6 +101,16 @@ export default {
     submit() {
       this.openAlert = false;
       this.$emit("alterObjTitle", this.objObj);
+    },
+    //展示图片
+    uploadImg(e) {
+      let file = e.target.files[0];
+      var reader = new FileReader();
+      const that = this;
+      reader.onload = evt => {
+        that.objObj.img = evt.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   },
   mounted() {
@@ -83,6 +122,31 @@ export default {
     this.objObj.DC = this.objinfo.DC;
     this.objObj.objMark = this.objinfo.objMark;
     this.objObj.tnum = this.num; //数组号
+    let file = this.objinfo.img;
+    if (file != null) {
+      var reader = new FileReader();
+      const that = this;
+      reader.onload = evt => {
+        that.objObj.img = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  },
+  watch: {
+    objinfo: {
+      deep: true,
+      handler(n) {
+        this.objObj.objTitle = n.objTitle;
+        this.objObj.objAns = n.objAns;
+        this.objObj.AC = n.AC;
+        this.objObj.BC = n.BC;
+        this.objObj.CC = n.CC;
+        this.objObj.DC = n.DC;
+        this.objObj.objMark = n.objMark;
+        this.objObj.tnum = this.num; //数组号
+        this.objObj.img = n.img;
+      }
+    }
   }
 };
 </script>

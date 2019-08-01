@@ -25,7 +25,7 @@
       <div button v-for="(key,value) in titleObj[0]" :key="value" class="title-item">
         <div>题号:{{value+1}}</div>
         <div>题目: {{key.objTitle}}</div>
-        <img src alt ref="img" />
+        <img :src="key.img" alt class="upimg" />
         <div>A选项： {{key.AC}}</div>
         <div>B选项： {{key.BC}}</div>
         <div>C选项： {{key.CC}}</div>
@@ -47,7 +47,7 @@
           <br />
           {{item.subTitle}}
         </div>
-        <img src alt ref="img2" />
+        <img :src="item.img" alt class="upimg" />
         <div>
           答案：
           <br />
@@ -84,7 +84,7 @@
   display: flex;
   justify-content: space-around;
 }
-img {
+.upimg {
   width: 500px;
   margin: 0 auto;
   margin-top: 20px;
@@ -118,23 +118,27 @@ export default {
     titleInfo(obj) {
       if (obj.type == 0) {
         this.titleObj[0].push(obj);
-        var reader = new FileReader();
-        const that = this;
-        reader.onload = evt => {
-          that.$refs.img[that.titleObj[0].length - 1].src = evt.target.result;
-          that.titleObj[0][that.titleObj[0].length - 1].img = evt.target.result;
-        };
-        reader.readAsDataURL(obj.img);
+        if (obj.img != null) {
+          var reader = new FileReader();
+          const that = this;
+          reader.onload = evt => {
+            that.titleObj[0][that.titleObj[0].length - 1].img =
+              evt.target.result;
+          };
+          reader.readAsDataURL(obj.img);
+        }
       }
       if (obj.type == 1) {
         this.titleObj[1].push(obj);
-        var reader = new FileReader();
-        const that = this;
-        reader.onload = evt => {
-          that.$refs.img2[that.titleObj[1].length - 1].src = evt.target.result;
-          that.titleObj[1][that.titleObj[1].length - 1].img = evt.target.result;
-        };
-        reader.readAsDataURL(obj.img);
+        if (obj.img != null) {
+          var reader = new FileReader();
+          const that = this;
+          reader.onload = evt => {
+            that.titleObj[1][that.titleObj[1].length - 1].img =
+              evt.target.result;
+          };
+          reader.readAsDataURL(obj.img);
+        }
       }
     },
     //修改子组件穿过来的客观题对象
@@ -146,12 +150,14 @@ export default {
       this.titleObj[0][d.tnum].CC = d.CC;
       this.titleObj[0][d.tnum].DC = d.DC;
       this.titleObj[0][d.tnum].objMark = d.objMark;
+      this.titleObj[0][d.tnum].img = d.img;
     },
     //修改子组件穿过来的主观题对象
     alterS(d) {
       this.titleObj[1][d.tnum].subMark = d.subMark;
       this.titleObj[1][d.tnum].subTitle = d.subTitle;
       this.titleObj[1][d.tnum].subAns = d.subAns;
+      this.titleObj[1][d.tnum].img = d.img;
     },
     deleteT(i) {
       this.titleObj[0].splice(i, 1);
