@@ -193,6 +193,7 @@ export default {
     }
   },
   mounted() {
+    this.bus.$emit('adminInfo',this.$route.query.id);
     let that = this;
     this.axios
       .post(this.apiUrl.getExamPaperTitleInfo, {

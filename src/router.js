@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Login from "@/views/Login";
-import Main from "@/views/Main";
 import CreateMain from "@/views/CreateMain";
 import PreviewMain from "@/views/PreviewMain";
 import PreviewAlter from "@/views/PreviewAlter";
@@ -18,11 +17,6 @@ export default new Router({
       path: "/",
       name: "Login",
       component: Login
-    },
-    {
-      path: "/main",
-      name: "Main",
-      component: Main
     },
     {
       path: "/createmain",

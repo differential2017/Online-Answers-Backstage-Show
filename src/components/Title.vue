@@ -15,9 +15,6 @@
         <mu-list-item button @click.prevent="show">
           <mu-list-item-title>判卷</mu-list-item-title>
         </mu-list-item>
-        <mu-list-item button to="/alterranking">
-          <mu-list-item-title>查看成绩</mu-list-item-title>
-        </mu-list-item>
         <mu-list-item @click="open = false" button>
           <mu-list-item-title>Close</mu-list-item-title>
         </mu-list-item>

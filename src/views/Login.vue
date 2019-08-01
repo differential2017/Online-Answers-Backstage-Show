@@ -66,7 +66,7 @@ export default {
               if (response.data == "登录成功") {
                 //传递给主页面用户名
                 that.$router.push({
-                  path: "/main",
+                  path: "/createmain",
                   query: { id: that.validateForm.username }
                 });
               }

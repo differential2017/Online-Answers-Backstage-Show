@@ -20,7 +20,7 @@
         <mu-text-field v-model="subObj.subAns" multi-line :rows="4" full-width></mu-text-field>
         <label>分值</label>
         <mu-text-field v-model="subObj.subMark"></mu-text-field>
-        <br>
+        <br />
         <mu-button slot="actions" flat color="primary" @click="closeAlertDialog">关闭</mu-button>
         <mu-button slot="actions" flat color="primary" @click="submit">确定</mu-button>
       </mu-container>
@@ -29,7 +29,6 @@
 </template>
 
 <script>
-
 export default {
   props: ["subinfo", "num"],
   data() {
@@ -58,10 +57,10 @@ export default {
     }
   },
   mounted() {
-      this.subObj.tnum = this.num;
-      this.subObj.subMark = this.subinfo.subMark;
-      this.subObj.subTitle = this.subinfo.subTitle;
-      this.subObj.subAns = this.subinfo.subAns;
+    this.subObj.tnum = this.num;
+    this.subObj.subMark = this.subinfo.subMark;
+    this.subObj.subTitle = this.subinfo.subTitle;
+    this.subObj.subAns = this.subinfo.subAns;
   }
 };
 </script>

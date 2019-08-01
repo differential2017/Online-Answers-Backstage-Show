@@ -3,6 +3,14 @@
     <Title></Title>
     <!-- 查看试卷 决定判哪个试卷 -->
     <mu-container>
+      <mu-select label="筛选部门" v-model="depart" full-width>
+        <mu-option
+          v-for="(option,index) in options"
+          :key="index"
+          :label="option.DEPART_NAME"
+          :value="option.DEPART_NAME"
+        ></mu-option>
+      </mu-select>
       <mu-paper :z-depth="1">
         <mu-data-table
           :columns="columns"
@@ -55,7 +63,9 @@ export default {
         { title: "考试时长", name: "SET_TIME", align: "center" },
         { title: "修改", align: "center" }
       ],
-      list: []
+      list: [],
+      depart:null,
+      saveList:[]
     };
   },
   methods: {
@@ -71,6 +81,16 @@ export default {
       });
     }
   },
+    watch:{
+    depart(value){
+      this.list=[];
+      for(let i = 0; i< this.saveList.length;i++){
+        if(this.saveList[i].DEPART_NAME==value){
+          this.list.push(this.saveList[i]);
+        }
+      }
+    }
+  },
   mounted() {
     let that = this;
     this.bus.$emit("adminInfo", this.$route.query.id);
@@ -79,6 +99,17 @@ export default {
       .post(this.apiUrl.getExamPaperInfo, {})
       .then(function(response) {
         that.list = response.data;
+        that.saveList=that.list;
+      })
+      .catch(function(error) {
+        alert("请求失败");
+      });
+    //请求部门信息
+    this.axios
+      .post(this.apiUrl.departName, {})
+      .then(function(response) {
+        console.log(response.data);
+        that.options = response.data;
       })
       .catch(function(error) {
         alert("请求失败");

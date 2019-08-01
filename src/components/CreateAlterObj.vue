@@ -18,22 +18,22 @@
         <mu-text-field v-model="objObj.objTitle" multi-line :rows="4" full-width class="title-form"></mu-text-field>
         <label>A选项</label>
         <mu-text-field v-model="objObj.AC"></mu-text-field>
-        <br>
+        <br />
         <label>B选项</label>
         <mu-text-field v-model="objObj.BC"></mu-text-field>
-        <br>
+        <br />
         <label>C选项</label>
         <mu-text-field v-model="objObj.CC"></mu-text-field>
-        <br>
+        <br />
         <label>D选项</label>
         <mu-text-field v-model="objObj.DC"></mu-text-field>
-        <br>
+        <br />
         <mu-select label="答案" v-model="objObj.objAns" full-width>
           <mu-option v-for="(option) in options" :key="option" :label="option" :value="option"></mu-option>
         </mu-select>
         <label>分值</label>
         <mu-text-field v-model="objObj.objMark"></mu-text-field>
-        <br>
+        <br />
         <mu-button slot="actions" flat color="primary" @click="closeAlertDialog">关闭</mu-button>
         <mu-button slot="actions" flat color="primary" @click="submit">确定</mu-button>
       </mu-container>
@@ -43,22 +43,22 @@
 
 <script>
 export default {
-  props:["objinfo","num"],
+  props: ["objinfo", "num"],
   data() {
     return {
       objObj: {
-        tnum:null,
-        type:0,
+        tnum: null,
+        type: 0,
         objTitle: null,
         objAns: null,
         AC: null,
         BC: null,
         CC: null,
         DC: null,
-        objMark:null,
+        objMark: null
       },
-      openAlert:false,
-      options: ["A", "B", "C", "D"],
+      openAlert: false,
+      options: ["A", "B", "C", "D"]
     };
   },
   methods: {
@@ -69,20 +69,20 @@ export default {
       this.openAlert = false;
     },
     //将修改后的对象返回
-    submit(){
+    submit() {
       this.openAlert = false;
-        this.$emit("alterObjTitle",this.objObj);
+      this.$emit("alterObjTitle", this.objObj);
     }
   },
-  mounted(){
-      this.objObj.objTitle=this.objinfo.objTitle;
-      this.objObj.objAns=this.objinfo.objAns;
-      this.objObj.AC=this.objinfo.AC;
-      this.objObj.BC=this.objinfo.BC;
-      this.objObj.CC=this.objinfo.CC;
-      this.objObj.DC=this.objinfo.DC;
-      this.objObj.objMark=this.objinfo.objMark;
-      this.objObj.tnum=this.num;//数组号
+  mounted() {
+    this.objObj.objTitle = this.objinfo.objTitle;
+    this.objObj.objAns = this.objinfo.objAns;
+    this.objObj.AC = this.objinfo.AC;
+    this.objObj.BC = this.objinfo.BC;
+    this.objObj.CC = this.objinfo.CC;
+    this.objObj.DC = this.objinfo.DC;
+    this.objObj.objMark = this.objinfo.objMark;
+    this.objObj.tnum = this.num; //数组号
   }
 };
 </script>

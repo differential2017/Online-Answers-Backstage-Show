@@ -24,10 +24,11 @@
       </div>
       <br />
       <div>
-          考生回答：<br/>
-       {{item.USER_ANS}}
+        考生回答：
+        <br />
+        {{item.USER_ANS}}
       </div>
-       <label>得分：</label>
+      <label>得分：</label>
       <mu-text-field v-model="item.ans_mark"></mu-text-field>
       <div>分数:{{item.subMark}}</div>
     </div>
@@ -65,17 +66,21 @@ export default {
       paperId: null
     };
   },
-  methods:{
-      save(){
-          let that=this;
-          this.axios.post(that.apiUrl.saveSub,{
-              userId:that.$route.query.userId,
-              paperId:that.$route.query.paperId,
-              sub:that.titleObj[1]
-          }).then(function(response){
-              console.log(response.data);
-          });
-      }
+  methods: {
+    save() {
+      let that = this;
+      this.axios
+        .post(that.apiUrl.saveSub, {
+          adminId: that.$route.query.adminId,  
+          userId: that.$route.query.userId,
+          paperId: that.$route.query.paperId,
+          sub: that.titleObj[1]
+        })
+        .then(function(response) {
+          alert(response.data);
+        });
+      this.$router.go(-1);
+    }
   },
   mounted() {
     let that = this;
@@ -96,9 +101,9 @@ export default {
             objMark: response.data[0][i].QUES_MAX,
             id: response.data[0][i].QUES_ID,
             type: response.data[0][i].QUES_TYPE,
-            ANS:response.data[0][i].ANS,
-            ANS_MARK:response.data[0][i].ANS_MARK,
-            USER_ANS:response.data[0][i].USER_ANS
+            ANS: response.data[0][i].ANS,
+            ANS_MARK: response.data[0][i].ANS_MARK,
+            USER_ANS: response.data[0][i].USER_ANS
           };
           that.titleObj[0].push(a);
         }
@@ -109,8 +114,8 @@ export default {
             subTitle: response.data[1][i].QUES_CONTENT,
             type: response.data[1][i].QUES_TYPE,
             id: response.data[1][i].QUES_ID,
-            USER_ANS:response.data[1][i].USER_ANS,
-            ans_mark:null,
+            USER_ANS: response.data[1][i].USER_ANS,
+            ans_mark: null
           };
           that.titleObj[1].push(a);
         }

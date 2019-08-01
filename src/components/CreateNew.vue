@@ -11,6 +11,7 @@
       :esc-press-close="false"
       :overlay-close="false"
       :open.sync="openAlert"
+      scrollable
     >
       <!-- 题目的表单 -->
 
