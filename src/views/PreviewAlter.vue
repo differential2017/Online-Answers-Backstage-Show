@@ -32,7 +32,7 @@
         <div>题号:{{value+1}}</div>
         <div>题目: {{key.objTitle}}</div>
         <div>
-          <img :src="key.img" alt="" class="upimg">
+          <img :src="key.img" alt class="upimg" />
         </div>
         <div>A选项： {{key.AC}}</div>
         <div>B选项： {{key.BC}}</div>
@@ -52,12 +52,14 @@
         <div>题号：{{titleObj[0].length+i+1}}</div>
         <div>
           题目：
-          <br>
-          {{item.subTitle}}
+          <br />
+        </div>
+        <div>
+          <img :src="item.img" alt class="upimg" />
         </div>
         <div>
           答案：
-          <br>
+          <br />
           {{item.subAns}}
         </div>
         <div>分数:{{item.subMark}}</div>
@@ -115,9 +117,27 @@ export default {
     titleInfo(obj) {
       if (obj.type == 0) {
         this.titleObj[0].push(obj);
+        if (obj.img != null) {
+          var reader = new FileReader();
+          const that = this;
+          reader.onload = evt => {
+            that.titleObj[0][that.titleObj[0].length - 1].img =
+              evt.target.result;
+          };
+          reader.readAsDataURL(obj.img);
+        }
       }
       if (obj.type == 1) {
         this.titleObj[1].push(obj);
+        if (obj.img != null) {
+          var reader = new FileReader();
+          const that = this;
+          reader.onload = evt => {
+            that.titleObj[1][that.titleObj[1].length - 1].img =
+              evt.target.result;
+          };
+          reader.readAsDataURL(obj.img);
+        }
       }
     },
     //修改子组件穿过来的客观题对象
@@ -163,12 +183,11 @@ export default {
       this.axios
         .post(this.apiUrl.alterPaper, {
           paperId: this.$route.query.paper_id,
-          userName: this.$route.query.id,
-          paperName:that.form.input,
-          startTime:that.form.start,
-          endTime:that.form.end,
-          setTime:that.form.settime,
-          title:that.titleObj
+          paperName: that.form.input,
+          startTime: that.form.start,
+          endTime: that.form.end,
+          setTime: that.form.settime,
+          title: that.titleObj
         })
         .then(function(response) {
           alert(response.data);
@@ -198,12 +217,11 @@ export default {
     }
   },
   mounted() {
-    this.bus.$emit('adminInfo',this.$route.query.id);
+    this.bus.$emit("adminInfo", this.$route.query.id);
     let that = this;
     this.axios
       .post(this.apiUrl.getExamPaperTitleInfo, {
         paperId: this.$route.query.paper_id,
-        userName: this.$route.query.id
       })
       .then(function(response) {
         console.log(response.data);
@@ -223,8 +241,8 @@ export default {
             objAns: response.data[0][i].ANS,
             objMark: response.data[0][i].QUES_MAX,
             id: response.data[0][i].QUES_ID,
-            type:response.data[0][i].QUES_TYPE,
-            img:response.data[0][i].IMAGE
+            type: response.data[0][i].QUES_TYPE,
+            img: response.data[0][i].IMAGE
           };
           that.titleObj[0].push(a);
         }
@@ -234,9 +252,9 @@ export default {
             subMark: response.data[1][i].QUES_MAX,
             subTitle: response.data[1][i].QUES_CONTENT,
             subAns: response.data[1][i].ANS,
-            type:response.data[1][i].QUES_TYPE,
+            type: response.data[1][i].QUES_TYPE,
             id: response.data[1][i].QUES_ID,
-            img:response.data[0][i].IMAGE
+            img: response.data[1][i].IMAGE
           };
           that.titleObj[1].push(a);
         }

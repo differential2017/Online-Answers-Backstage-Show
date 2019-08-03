@@ -70,8 +70,7 @@ export default {
     save() {
       let that = this;
       this.axios
-        .post(that.apiUrl.saveSub, {
-          adminId: that.$route.query.adminId,  
+        .post(that.apiUrl.saveSub, { 
           userId: that.$route.query.userId,
           paperId: that.$route.query.paperId,
           sub: that.titleObj[1]

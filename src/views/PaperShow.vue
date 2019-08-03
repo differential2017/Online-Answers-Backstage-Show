@@ -78,7 +78,7 @@ export default {
     goToPreviewAlter(i) {
       this.$router.push({
         path: "/peopleshow",
-        query: { id: this.$route.query.id, paper_id: i }
+        query: { paper_id: i }
       });
     }
   },

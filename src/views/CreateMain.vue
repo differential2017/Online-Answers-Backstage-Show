@@ -176,7 +176,6 @@ export default {
       that.form.end = new Date(that.form.end).toString();
       this.axios
         .post(this.apiUrl.examPaperInfo, {
-          user: that.$route.query.id,
           name: that.form.input,
           start: that.form.start,
           end: that.form.end,

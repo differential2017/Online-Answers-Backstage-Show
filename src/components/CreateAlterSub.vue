@@ -16,7 +16,6 @@
       <!-- 题目的表单 -->
       <mu-container>
         <label>题目</label>
-        {{subObj}}
         <mu-text-field v-model="subObj.subTitle" multi-line :rows="4" full-width class="title-form"></mu-text-field>
         <div>
           <img :src="subObj.img" alt class="upimg" />

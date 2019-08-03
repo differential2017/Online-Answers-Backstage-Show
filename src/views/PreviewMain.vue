@@ -72,7 +72,7 @@ export default {
     goToPreviewAlter(i) {
       this.$router.push({
         path: "/previewalter",
-        query: { id: this.$route.query.id, paper_id: i }
+        query: {paper_id: i }
       });
     }
   },
@@ -103,7 +103,6 @@ export default {
        this.axios
       .post(this.apiUrl.departName, {})
       .then(function(response) {
-        console.log(response.data);
         that.options = response.data;
       })
       .catch(function(error) {
