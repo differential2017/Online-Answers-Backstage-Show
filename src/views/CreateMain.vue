@@ -40,7 +40,7 @@
       </div>
 
       <!-- 展示主观题 -->
-      <div button v-for="(item,i) in titleObj[1]" :key="item+'1'" class="title-item">
+      <div button v-for="(item,i) in titleObj[1]" :key="'1'+i" class="title-item">
         <div>题号：{{titleObj[0].length+i+1}}</div>
         <div>
           题目：

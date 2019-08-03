@@ -31,6 +31,9 @@
       <div button v-for="(key,value) in titleObj[0]" :key="value" class="title-item">
         <div>题号:{{value+1}}</div>
         <div>题目: {{key.objTitle}}</div>
+        <div>
+          <img :src="key.img" alt="" class="upimg">
+        </div>
         <div>A选项： {{key.AC}}</div>
         <div>B选项： {{key.BC}}</div>
         <div>C选项： {{key.CC}}</div>
@@ -126,6 +129,7 @@ export default {
       this.titleObj[0][d.tnum].CC = d.CC;
       this.titleObj[0][d.tnum].DC = d.DC;
       this.titleObj[0][d.tnum].objMark = d.objMark;
+      this.titleObj[0][d.tnum].img = d.img;
       this.titleObj[0][d.tnum].flag = 1;
     },
     //修改子组件穿过来的主观题对象
@@ -133,6 +137,7 @@ export default {
       this.titleObj[1][d.tnum].subMark = d.subMark;
       this.titleObj[1][d.tnum].subTitle = d.subTitle;
       this.titleObj[1][d.tnum].subAns = d.subAns;
+      this.titleObj[1][d.tnum].img = d.img;
       this.titleObj[1][d.tnum].flag = 1;
     },
     //删除试卷
@@ -218,7 +223,8 @@ export default {
             objAns: response.data[0][i].ANS,
             objMark: response.data[0][i].QUES_MAX,
             id: response.data[0][i].QUES_ID,
-            type:response.data[0][i].QUES_TYPE
+            type:response.data[0][i].QUES_TYPE,
+            img:response.data[0][i].IMAGE
           };
           that.titleObj[0].push(a);
         }
@@ -229,7 +235,8 @@ export default {
             subTitle: response.data[1][i].QUES_CONTENT,
             subAns: response.data[1][i].ANS,
             type:response.data[1][i].QUES_TYPE,
-            id: response.data[1][i].QUES_ID
+            id: response.data[1][i].QUES_ID,
+            img:response.data[0][i].IMAGE
           };
           that.titleObj[1].push(a);
         }

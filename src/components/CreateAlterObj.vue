@@ -107,10 +107,10 @@ export default {
       let file = e.target.files[0];
       var reader = new FileReader();
       const that = this;
-      reader.onload = evt => {
-        that.objObj.img = evt.target.result;
-      };
-      reader.readAsDataURL(file);
+        reader.onload = evt => {
+          that.objObj.img = evt.target.result;
+        };
+        reader.readAsDataURL(file);
     }
   },
   mounted() {
@@ -123,14 +123,7 @@ export default {
     this.objObj.objMark = this.objinfo.objMark;
     this.objObj.tnum = this.num; //数组号
     let file = this.objinfo.img;
-    if (file != null) {
-      var reader = new FileReader();
-      const that = this;
-      reader.onload = evt => {
-        that.objObj.img = evt.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
+    this.objObj.img=file;
   },
   watch: {
     objinfo: {

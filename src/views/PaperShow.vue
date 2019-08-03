@@ -63,6 +63,7 @@ export default {
         { title: "考试时长", name: "SET_TIME", align: "center" },
         { title: "修改", align: "center" }
       ],
+      options:[],
       list: [],
       depart:null,
       saveList:[]

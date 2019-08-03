@@ -90,14 +90,7 @@ export default {
     this.subObj.subTitle = this.subinfo.subTitle;
     this.subObj.subAns = this.subinfo.subAns;
     let file = this.subinfo.img;
-    if (file != null) {
-      var reader = new FileReader();
-      const that = this;
-      reader.onload = evt => {
-        that.subObj.img = evt.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
+    this.subObj.img=file;
   },
   watch: {
     subinfo: {
