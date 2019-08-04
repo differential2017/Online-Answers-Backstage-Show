@@ -69,8 +69,8 @@ export default {
       ],
       list: [],
       saveList: [],
-      current:1,
-      sum:0,
+      current: 1,
+      sum: 0
     };
   },
   methods: {
@@ -105,7 +105,18 @@ export default {
       .then(function(response) {
         that.list = response.data;
         that.saveList = that.list;
-        that.sum=that.list.length;
+        that.sum = that.list.length;
+
+         //对START_TIME进行排序
+        for (let i = 0; i < that.list.length; i++) {
+          for (let j = 0; j < that.list.length - 1 - i; j++) {
+            if (new Date(that.list[j].START_TIME) < new Date(that.list[j + 1].START_TIME)) {
+              let t = that.list[j];
+              that.list[j] = that.list[j + 1];
+              that.list[j + 1] = t;
+            }
+          }
+        }
       })
       .catch(function(error) {
         alert("请求失败");
