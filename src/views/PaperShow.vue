@@ -16,7 +16,7 @@
           :columns="columns"
           :sort.sync="sort"
           @sort-change="handleSortChange"
-          :data="list"
+          :data="list.slice((current-1)*10,current*10)"
           class="preview-form"
         >
           <template slot-scope="scope">
@@ -33,8 +33,12 @@
           </template>
         </mu-data-table>
       </mu-paper>
+       <mu-flex justify-content="center" style="margin: 32px 0;">
+        <mu-pagination raised :total="sum" :current.sync="current"></mu-pagination>
+      </mu-flex>
     </mu-container>
   </div>
+  
 </template>
 <style>
 .update-button {
@@ -66,7 +70,9 @@ export default {
       options:[],
       list: [],
       depart:null,
-      saveList:[]
+      saveList:[],
+      current:1,
+      sum:0
     };
   },
   methods: {
@@ -101,6 +107,7 @@ export default {
       .then(function(response) {
         that.list = response.data;
         that.saveList=that.list;
+        that.sum=that.list.length;
       })
       .catch(function(error) {
         alert("请求失败");

@@ -13,7 +13,7 @@
           :columns="columns"
           :sort.sync="sort"
           @sort-change="handleSortChange"
-          :data="list"
+          :data="list.slice((current-1)*10,current*10)"
         >
           <template slot-scope="scope">
             <td class="is-center">{{scope.row.fresh_id}}</td>
@@ -27,6 +27,9 @@
           </template>
         </mu-data-table>
       </mu-paper>
+             <mu-flex justify-content="center" style="margin: 32px 0;">
+        <mu-pagination raised :total="sum" :current.sync="current"></mu-pagination>
+      </mu-flex>
     </mu-container>
   </div>
 </template> 
@@ -73,7 +76,9 @@ export default {
         }
       ],
       list: [],
-      saveList:[]
+      saveList:[],
+      current:1,
+      sum:0,
     };
   },
   methods: {
@@ -127,6 +132,7 @@ export default {
         console.log(response.data);
         that.list = response.data;
         that.saveList=that.list;
+        that.sum=that.list.length;
         //计算总分
         for (let i = 0; i < that.list.length; i++) {
           if (that.list[i].objmark == null && that.list[i].submark != null)

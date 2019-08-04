@@ -3,14 +3,19 @@
     <Title></Title>
     <mu-container>
       <mu-select label="筛选部门" v-model="depart" full-width>
-        <mu-option v-for="(option,index) in options" :key="index" :label="option.DEPART_NAME" :value="option.DEPART_NAME"></mu-option>
+        <mu-option
+          v-for="(option,index) in options"
+          :key="index"
+          :label="option.DEPART_NAME"
+          :value="option.DEPART_NAME"
+        ></mu-option>
       </mu-select>
       <mu-paper :z-depth="1">
         <mu-data-table
           :columns="columns"
           :sort.sync="sort"
           @sort-change="handleSortChange"
-          :data="list"
+          :data="list.slice((current-1)*10,current*10)"
           class="preview-form"
         >
           <template slot-scope="scope">
@@ -27,6 +32,9 @@
           </template>
         </mu-data-table>
       </mu-paper>
+      <mu-flex justify-content="center" style="margin: 32px 0;">
+        <mu-pagination raised :total="sum" :current.sync="current"></mu-pagination>
+      </mu-flex>
     </mu-container>
   </div>
 </template>
@@ -49,8 +57,8 @@ export default {
         name: "",
         order: "asc"
       },
-      options:[],
-      depart:null,
+      options: [],
+      depart: null,
       columns: [
         { title: "试卷所属部门", name: "DEPART_NAME", align: "center" },
         { title: "试卷名", name: "PAPER_NAME", align: "center" },
@@ -60,7 +68,9 @@ export default {
         { title: "修改", align: "center" }
       ],
       list: [],
-      saveList:[]
+      saveList: [],
+      current:1,
+      sum:0,
     };
   },
   methods: {
@@ -72,15 +82,15 @@ export default {
     goToPreviewAlter(i) {
       this.$router.push({
         path: "/previewalter",
-        query: {paper_id: i }
+        query: { paper_id: i }
       });
     }
   },
-  watch:{
-    depart(value){
-      this.list=[];
-      for(let i = 0; i< this.saveList.length;i++){
-        if(this.saveList[i].DEPART_NAME==value){
+  watch: {
+    depart(value) {
+      this.list = [];
+      for (let i = 0; i < this.saveList.length; i++) {
+        if (this.saveList[i].DEPART_NAME == value) {
           this.list.push(this.saveList[i]);
         }
       }
@@ -94,13 +104,14 @@ export default {
       .post(this.apiUrl.getExamPaperInfo, {})
       .then(function(response) {
         that.list = response.data;
-        that.saveList=that.list;
+        that.saveList = that.list;
+        that.sum=that.list.length;
       })
       .catch(function(error) {
         alert("请求失败");
       });
-      //请求部门信息
-       this.axios
+    //请求部门信息
+    this.axios
       .post(this.apiUrl.departName, {})
       .then(function(response) {
         that.options = response.data;
